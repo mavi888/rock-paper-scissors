@@ -1,6 +1,20 @@
 function game() {
+  var scoreComputer = 0;
+  var scorePlayer = 0;
+
   for (var i = 1; i <= 3; i++) {
-    round();
+    var winner = round();
+    if (winner == 1) {
+      scorePlayer++;
+    } else if (winner == -1) {
+      scoreComputer++;
+    }
+  }
+
+  if (scoreComputer > scorePlayer) {
+    console.log('Computer wins!');
+  } else {
+    console.log('Player wins!');
   }
 }
 
@@ -16,30 +30,36 @@ function round() {
   }
   console.log("Computer: " + computerChoice);
   console.log("User: " + userChoice);
-  var message = compare(userChoice, computerChoice);
-  console.log(message);
+  return compare(userChoice, computerChoice);
 }
 
 function compare (choice1, choice2) {
   if (choice1 === choice2) {
-    return "The result is a tie!";
+    console.log("The result is a tie!");
+    return 0;
   } else if (choice1 === "rock") {
     if (choice2 === "scissors") {
-      return "rock wins";
+      console.log("Rock wins");
+      return 1;
     } else {
-      return "paper wins";
+      console.log("Paper wins");
+      return -1;
     }
   } else if (choice1 === "paper") {
     if (choice2 === "scissors") {
-     return "scissors wins";
+      console.log("Scissors wins");
+      return -1;
     } else {
-      return "paper wins";
+      console.log("Paper wins");
+      return 1;
     }
   } else if (choice1 === "scissors") {
     if (choice2 === "paper") {
-      return "scissors wins";
+      console.log("Scissors wins");
+      return 1;
     } else {
-      return "rock wins";
+      console.log("Rock wins");
+      return -1;
     }
   }
 }
